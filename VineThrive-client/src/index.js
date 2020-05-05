@@ -1,2 +1,3 @@
-const app = new AppContainer 
-app.getNotes()
+const app = new AppContainer ;
+app.getPlants();
+app.bindEventListners();

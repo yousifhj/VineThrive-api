@@ -1,3 +1,3 @@
 class Plant < ApplicationRecord
-    has_many :notes
+    belongs_to :category
 end

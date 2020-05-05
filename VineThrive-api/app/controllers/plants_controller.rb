@@ -1,7 +1,7 @@
 class PlantsController < ApplicationController
 
     def index
-        render :json => Plant.all, :include => :notes
+        render :json => Plant.all, :include => :categories
     end 
 
 end
