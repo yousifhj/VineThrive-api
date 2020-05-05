@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Plant.destroy_all 
-Note.destroy_all 
+Plant.destroy_all
+Category.destroy_all 
 
-plant_a = Plant.create(name: "Chinese Evergreen", description: "beautiful", price: 22, light: "low", water: "high")
-plant_b = Plant.create(name: "ZZ Plant", description: "perfect fot anyroom", price: 42, light: "medium", water: "high")
-plant_c = Plant.create(name: "Marble Pathos", description: "great in anyroom", price: 12, light: "low", water: "low")
+plant_a = Plant.create(name: "Chinese Evergreen")
+plant_b = Plant.create(name: "ZZ Plant")
+plant_c = Plant.create(name: "Marble Pathos")
 
-note_a = Note.create(body: "Beautiful, lucious plant that is growing very nicely.", plant: plant_a)
-note_b = Note.create(body: "Placed plant in northwest corner of livingroom. Plant is flourshing.", plant: plant_b)
-note_c = Note.create(body: "Plant did have a few brown leaves. Removed brown leaves and planed in east corster of bedroom.", plant: plant_c)
+category_a = Category.create(name: "Big indoor", plant: plant_a)
+category_b = Category.create(name: "Easy Care", plant: plant_b)
+category_c = Category.create(name: "Vining Plant", plant: plant_c)

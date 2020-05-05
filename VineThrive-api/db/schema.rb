@@ -12,8 +12,8 @@
 
 ActiveRecord::Schema.define(version: 2020_05_05_063501) do
 
-  create_table "notes", force: :cascade do |t|
-    t.string "body"
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.integer "plant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -21,10 +21,6 @@ ActiveRecord::Schema.define(version: 2020_05_05_063501) do
 
   create_table "plants", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
-    t.string "description"
-    t.string "light"
-    t.string "water"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
