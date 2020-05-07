@@ -64,7 +64,6 @@ class AppContainer {
         const easyCareSelect = document.getElementById('easyCare');
         const bigIndoorSelect = document.getElementById('bigIndoor');
         AppContainer.plants.forEach(plant => {
-     console.log(hello3)
             const option = document.createElement('option');
             option.innerText = plant.name;
             // where we append will be conditional based on what category it belongs to
