@@ -9,10 +9,10 @@
 Plant.destroy_all
 Category.destroy_all 
 
-viningPlant = Category.create(name: "vining plant")
-easyCare = Category.create(name: "easy care")
-bigIndoor = Category.create(name: "big indoor")
+viningPlant = Category.create(name: "viningplants")
+easyCare = Category.create(name: "easycare")
+bigIndoor = Category.create(name: "bigindoor")
 
-Plant.create(name: "ZZ plant", category_id: easyCare)
+Plant.create(name: "ZZ plant", category: easyCare)
 Plant.create(name: "Monstera Swiss", category: bigIndoor)
 Plant.create(name: "Marble Pathos", category: viningPlant)
