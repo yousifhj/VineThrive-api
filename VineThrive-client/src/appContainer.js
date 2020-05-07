@@ -10,34 +10,45 @@ class AppContainer {
     }
 
     getRandomPlants() {
-        console.log('hello')
         let randomPlants = [];
         AppContainer.categories.forEach(category => {
-            randomPlants.push(Plants.byCategory(category.name)[Math.floor(Math.random()*AppContainer.plants.length)]);
+            randomPlants.push(Plant.byCategory(category.name)[Math.floor(Math.random()*Plant.byCategory(category.name).length)]);
         });
         // insiantiate a DailyPlants instance with these Plants
         new DailyPlants(randomPlants)
         // insert data into DOM
         const dailyPlantsDiv = document.getElementById('dailyPlants');
-        AppContainer.dailyPlants.plants.forEach(dailyPlants => {
+        AppContainer.dailyPlants.plants.forEach(plant => {
             const plantDiv = document.createElement('div');
-            plantDiv.innerText = dailyPlants.name;
+            plantDiv.innerText = plant.name;
             dailyPlantsDiv.appendChild(plantDiv);
         })
+
+        // randomPlants.forEach(plant => {
+            fetch(`http://localhost:3000/plants/${randomPlants[0].id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+        // })
+
     }
 
     getPlants() {
         // fetch reqeust to /plants
-                console.log('something');
+            console.log('something');
         fetch(this.url + '/plants')
         .then(resp => resp.json())
         // populate the plants and plants properties and returned data 
         .then(data => {
             console.log(data)
             data.forEach(plant => {
-                new Plant(plant.name, plant.category)
+                new Plant(plant.id, plant.name, plant.category)
                 if (!AppContainer.categories.map(category => category.name).includes(plant.category.name)) {
-                    new Category(plant.category.name)
+                   new Category(plant.category.name)
                 }
             });
             // Call renderPlants
@@ -47,22 +58,24 @@ class AppContainer {
     };
 
     renderPlants() {
-        // create DOM nodes and indert data into and render DOM
+        // create DOM nodes and indert data into and render DOM 
+        
         const viningPlantsSelect = document.getElementById('viningPlants');
         const easyCareSelect = document.getElementById('easyCare');
         const bigIndoorSelect = document.getElementById('bigIndoor');
         AppContainer.plants.forEach(plant => {
+     console.log(hello3)
             const option = document.createElement('option');
             option.innerText = plant.name;
             // where we append will be conditional based on what category it belongs to
             switch (plant.category.name) {
-                case "viningPlants":
+                case "viningplants":
                     viningPlantsSelect.appendChild(option);
                     break;
-                case "easyCare":
+                case "easycare":
                     easyCareSelect.appendChild(option);
                     break;
-                case "bigIndoor":
+                case "bigindoor":
                     bigIndoorSelect.appendChild(option);
                     break;
                 default:
