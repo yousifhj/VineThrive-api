@@ -1,7 +1,8 @@
 class Plant {
-    constructor(name, category){
+    constructor(id, name, category){
         this.name = name;
         this.category = category;
+        this.id = id;
         AppContainer.plants.push(this)
     }
 
