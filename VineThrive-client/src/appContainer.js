@@ -48,6 +48,25 @@ class AppContainer {
 
     renderPlants() {
         // create DOM nodes and indert data into and render DOM
-
+        const viningPlantsSelect = document.getElementById('viningPlants');
+        const easyCareSelect = document.getElementById('easyCare');
+        const bigIndoorSelect = document.getElementById('bigIndoor');
+        AppContainer.plants.forEach(plant => {
+            const option = document.createElement('option');
+            option.innerText = plant.name;
+            // where we append will be conditional based on what category it belongs to
+            switch (plant.category.name) {
+                case "viningPlants":
+                    viningPlantsSelect.appendChild(option);
+                    break;
+                case "easyCare":
+                    easyCareSelect.appendChild(option);
+                    break;
+                case "bigIndoor":
+                    bigIndoorSelect.appendChild(option);
+                    break;
+                default:
+            }
+        })
     }
  }
