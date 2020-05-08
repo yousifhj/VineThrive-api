@@ -1,12 +1,39 @@
 class AppContainer {
     static plants = [];
     static categories = [];
-    url = "http://localhost:3000"
+     url = "http://localhost:3000"
     static dailyPlants = {};
 
     bindEventListners(){
         const btn = document.getElementById('createDailyPlants');
-        btn.addEventListener('click', this.getRandomPlants);
+        btn.addEventListener('click', () => this.getRandomPlants());
+
+        const newPlantForm = document.getElementById('newPlant');
+        newPlantForm.addEventListener('submit', () => this.createPlant(event));
+    }
+
+    // this = instace of app container  
+    createPlant(event) {
+        event.preventDefault();
+        // const form = document.getElementById('newPlant')
+        const data = event.target;
+        console.log(this)
+        fetch(`${this.url}/plants`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: data.plant.value,
+              category: data.children[2].value
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            AppContainer.plants.push(new Plant(data))
+        })
+        .catch(err => console.log(err));
     }
 
     getRandomPlants() {
@@ -24,8 +51,8 @@ class AppContainer {
             dailyPlantsDiv.appendChild(plantDiv);
         })
 
-        randomPlants.forEach(randomPlants => {
-            fetch(`http://localhost:3000/plants/${randomPlants[0].id}`, {
+        randomPlants.forEach(plant => {
+            fetch(`${this.url}/plants/${plant.id}`, {
                 method: 'DELETE',
             })
             .then(resp => resp.json())
