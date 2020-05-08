@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Plant.destroy_all
-Category.destroy_all 
+Category.destroy_all  
 
 viningPlant = Category.create(name: "viningplants")
 easyCare = Category.create(name: "easycare")
