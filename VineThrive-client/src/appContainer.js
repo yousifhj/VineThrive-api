@@ -24,16 +24,14 @@ class AppContainer {
             dailyPlantsDiv.appendChild(plantDiv);
         })
 
-        // randomPlants.forEach(plant => {
+        randomPlants.forEach(randomPlants => {
             fetch(`http://localhost:3000/plants/${randomPlants[0].id}`, {
                 method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json'
-                }
             })
             .then(resp => resp.json())
             .then(data => console.log(data))
-        // })
+            .catch(err => console.log(err))
+        })
 
     }
 

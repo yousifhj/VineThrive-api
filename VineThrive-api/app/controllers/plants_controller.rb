@@ -5,9 +5,11 @@ class PlantsController < ApplicationController
     end 
 
     def destroy
-        Plant.find(params[:id]).destroy
+        plant = Plant.find(params[:id]).destroy
         if plant.destroy
-            render json: { message: "Plant deleted"}
+            render json: { message: "Plant was successfully deleted"}
+        # else 
+        #     render json:{ message: "there was an error"}
         end
     end 
 end
