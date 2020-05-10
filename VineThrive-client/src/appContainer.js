@@ -17,8 +17,7 @@ class AppContainer {
         event.preventDefault();
         // const form = document.getElementById('newPlant')
         const data = event.target;
-        console.log(this)
-        fetch(`${this.url}/plants`, {
+        fetch(`${this.url}/categories/${id}/plants`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -31,6 +30,7 @@ class AppContainer {
         })
         .then(resp => resp.json())
         .then(data => {
+            debugger
             AppContainer.plants.push(new Plant(data))
         })
         .catch(err => console.log(err));
@@ -41,30 +41,45 @@ class AppContainer {
         AppContainer.categories.forEach(category => {
             randomPlants.push(Plant.byCategory(category.name)[Math.floor(Math.random()*Plant.byCategory(category.name).length)]);
         });
-        // insiantiate a DailyPlants instance with these Plants
+        // insiantiate DailyPlants with these Plants
         new DailyPlants(randomPlants)
         // insert data into DOM
-        const dailyPlantsDiv = document.getElementById('dailyPlants');
         AppContainer.dailyPlants.plants.forEach(plant => {
+            const container = document.querySelector('.container');
+            const dailyPlantsDiv = document.getElementById('dailyPlants');
             const plantDiv = document.createElement('div');
-            plantDiv.innerText = plant.name;
+
+            const plantName = plant.name;
+            plantDiv.innerText = plantName;
+            plantDiv.setAttribute("class", "plants")
+
+            const plantId = plant.id;
+            plantDiv.setAttribute("id", plantId)
+
+            const remove = document.createElement('button');
+            remove.classList.add('remove');
+            remove.setAttribute("id", plantId);
+            remove.innerHTML = "REMOVE";
+            remove.addEventListener('click', () => this.remove(plantDiv, plantId));
+            
+            container.appendChild(dailyPlantsDiv);
             dailyPlantsDiv.appendChild(plantDiv);
+            plantDiv.appendChild(remove);
         })
 
-        randomPlants.forEach(plant => {
-            fetch(`${this.url}/plants/${plant.id}`, {
-                method: 'DELETE',
-            })
-            .then(resp => resp.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
-        })
+        // randomPlants.forEach(plant => {
+        //     fetch(`${this.url}/plants/${plant.id}`, {
+        //         method: 'DELETE',
+        //     })
+        //     .then(resp => resp.json())
+        //     .then(data => console.log(data))
+        //     .catch(err => console.log(err))
+        // })
 
     }
 
     getPlants() {
         // fetch reqeust to /plants
-            console.log('something');
         fetch(this.url + '/plants')
         .then(resp => resp.json())
         // populate the plants and plants properties and returned data 
