@@ -1,4 +1,4 @@
-This is a single page application that allows a user with a click of a button to select random plants. The user will have the option to delete the plant that was randomly choosen if they choose.
+This is a single page application that allows a user with a click of a button to select random plants. The user will have the option to delete the plant that was randomly choosen if they choose. They are also able to add plants to the three categories
 
 
 ## Installation
