@@ -8,7 +8,7 @@ This is a single page application that allows a user with a click of a button to
 $ git clone https://github.com/yousifhj/VineThrive-api
 ```
 
-### Switch to directory
+### Switch to directory ###
 ```
 $ cd VineThrive-api/
 ```
@@ -23,11 +23,12 @@ $ bundle install
 $ rake db:migrate
 ```
 
-### Startup the server
+### Startup the server 
 ```
 $ rails s
+```
 
-### Enter in browser to view
+### Enter in the browser to view
 ```
 $  localhost:300
 ```
@@ -39,7 +40,7 @@ Copyright (c) 2019, Huda Yousif
 The application is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
 
-##Contributors
+## Contributors
 
 Contributions are welcome, and can be made by either opening an issue or making a pull request to this repo.
 
