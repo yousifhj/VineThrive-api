@@ -60,7 +60,10 @@ class AppContainer {
             remove.classList.add('remove');
             remove.setAttribute("id", plantId);
             remove.innerHTML = "REMOVE";
-            remove.addEventListener('click', () => this.remove(plantDiv, plantId));
+            remove.addEventListener ('click', () => this.remove(plantDiv, plantId));
+            
+            // ('click', () => {removePlant(plantId)});
+            // ('click', () => this.remove(plantDiv, plantId));
             
             container.appendChild(dailyPlantsDiv);
             dailyPlantsDiv.appendChild(plantDiv);
