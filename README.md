@@ -1,25 +1,45 @@
 This is a single page application that allows a user with a click of a button to select random plants. The user will have the option to delete the plant that was randomly choosen if they choose.
 
 
-Installation:
+## Installation
 
-1. Fork and clone this repository, and then within the main directory execute
+### Fork and clone repo
+```
+$ git clone https://github.com/yousifhj/VineThrive-api
+```
 
-``` $ bundle install
+### Switch to directory
+```
+$ cd VineThrive-api/
+```
+
+### Execute for dependencies
+```
+$ bundle install
+```
+
+### Seed database
+```
+$ rake db:migrate
+```
+
+### Startup the server
+```
+$ rails s
+
+### Enter in browser to view
+```
+$  localhost:300
+```
+
+### License
+
+Copyright (c) 2019, Huda Yousif
+
+The application is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
 
-2. Seed some data to start with:
-
-``` $ rake db:seed
-
-3. Then run:
-
-``` $ rails s 
-
-4. Open up a new browser tab and navigate to:
-
-``` localhost:3000 
-
-Contributors: 
+##Contributors
 
 Contributions are welcome, and can be made by either opening an issue or making a pull request to this repo.
+
