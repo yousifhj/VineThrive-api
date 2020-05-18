@@ -17,7 +17,12 @@ class AppContainer {
         event.preventDefault();
         // const form = document.getElementById('newPlant')
         const data = event.target;
-        fetch(`${this.url}/categories/${id}/plants`, {
+        console.log(JSON.stringify({
+            name: data.plant.value,
+            category: data.children[2].value
+          }))
+        
+        fetch(`${this.url}/categories/plants`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -28,12 +33,12 @@ class AppContainer {
               category: data.children[2].value
             })
         })
-        .then(resp => resp.json())
-        .then(data => {
-            debugger
-            AppContainer.plants.push(new Plant(data))
-        })
-        .catch(err => console.log(err));
+        .then(resp => {
+            document.getElementById("plant_name_input").value = ""
+        }).catch(err => console.log(err))
+        .then(() => {
+            console.log('done')
+        });
     }
 
     getRandomPlants() {
@@ -60,25 +65,26 @@ class AppContainer {
             remove.classList.add('remove');
             remove.setAttribute("id", plantId);
             remove.innerHTML = "REMOVE";
-            remove.addEventListener ('click', () => this.remove(plantDiv, plantId));
-            
-            // ('click', () => {removePlant(plantId)});
-            // ('click', () => this.remove(plantDiv, plantId));
+            remove.addEventListener ('click', () => {this.removePlant(plantId)});
             
             container.appendChild(dailyPlantsDiv);
             dailyPlantsDiv.appendChild(plantDiv);
             plantDiv.appendChild(remove);
         })
 
-        // randomPlants.forEach(plant => {
-        //     fetch(`${this.url}/plants/${plant.id}`, {
-        //         method: 'DELETE',
-        //     })
-        //     .then(resp => resp.json())
-        //     .then(data => console.log(data))
-        //     .catch(err => console.log(err))
-        // })
+    }
 
+    removePlant (id) {
+        fetch(`${this.url}/plants/${id}`, {
+            method: 'DELETE'
+        }).then(res => {
+            console.log('success remove', id)
+            let elem = document.getElementById(id)
+            elem.remove()
+         }).catch(err => {
+            console.log(err)
+    
+        })
     }
 
     getPlants() {
