@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   post "categories/plants" => "plants#create"
   
+  put "plants/:id" => "plants#update"
   resources :plants, only: [:index, :destroy]
 end
 
