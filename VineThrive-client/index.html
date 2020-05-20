@@ -4,50 +4,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VineThrive</title>
+    <link rel="stylesheet" href="src/bootstrap.min.css">
+    <link rel="stylesheet" href="src/index.css">
 </head>
 
-    <h1>VineThrive</h1>
+<body> 
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-3 text-center">VineThrive</h1>
+                <p class="lead text-center">Can't decide which plants to purcase? Allow us to help you!</p>
+            </div>
+        </div>
+        
+        <div class="row">
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-12">
+                <label for="viningPlants" class="font-weight-bold h5" id="viningPlantsLabel" data-label="viningPlants">Vining Plants</label>
+                <div name = "" id="viningPlants" class="hidden"></div>
+            </div>
+        </div>
 
-<body>   
-    <label for="viningPlants">Vining Plants: </label>
-        <select name = "" id="viningPlants"></select>
-    <br>
-    <br>
-
-    <label for="easyCare">Easy Care Plants: </label>
-        <select name = "" id="easyCare"></select>
-    <br>
-    <br>
-
-    <label for="bigIndoor">Big Indoor Plants: </label>
-        <select name = "" id="bigIndoor"></select>
-    <br>
-    <br>
-
-    <h3>Which plants should you purchase?</h3>
-        <button id="createDailyPlants">Let's See</button>
-    <br>
-    <h4>Plants to Purchase: </h4>
-       
-    <div class="container"></div>
-    <div id="dailyPlants"></div>
-
-    <br>
-    <br>
-    <form id="newPlant">
-        <label for="">New Plant</label>
-        <input type="text" name="plant" id="plant_name_input">
-            <select name="categorySelect" id="categorySelect">
-                <option value="viningPlants">Vining Plants</option>
-                <option value="easyCare">Easy Care Plants</option>
-                <option value="bigIndoor">Big Indoor Plants</option>
-            </select>
-        <input type="submit">
-    </form>
-
+        <div class="row">
+            <div class="col-12">
+                <label for="easyCare" id="easyCareLabel" class="font-weight-bold h5" data-label="easyCare">Easy Care Plants</label>
+                <div name = "" id="easyCare" class="hidden"></div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-12">
+                    <label for="bigIndoor" id="bigIndoorLabel" class="font-weight-bold h5" data-label="bigIndoor">Big Indoor Plants</label>
+                    <div name = ""  id="bigIndoor" class="hidden"></div>
+                </div>
+            </div>
+        <br>
+        <br>
+    
+        <h4>Which plants should you purchase?</h4>
+            <button id="createDailyPlants" class="btn btn-success btn-sm">Let's See</button>
+        <br>
+           
+        <div class="container"></div>
+        <div id="dailyPlants"></div>
+        <hr class="my-4">
+        
+        <form id="newPlant">
+            <h5>Plants to Purchase: </h5>
+            <br>
+            <label for="">New Plant</label>
+            <input type="text" name="plant" id="plant_name_input">
+                <select name="categorySelect" id="categorySelect">
+                    <option value="viningPlants">Vining Plants</option>
+                    <option value="easyCare">Easy Care Plants</option>
+                    <option value="bigIndoor">Big Indoor Plants</option>
+                </select>
+            <input type="submit" class="btn btn-primary btn-sm">
+        </form>
+          
+    </div>
+</div>
     <script src="src/category.js"></script>
     <script src="src/dailyPlants.js"></script>
     <script src="src/plant.js"></script>
+    <script src="src/appListener.js"></script>
     <script src="src/appContainer.js"></script>
     <script src="src/index.js"></script>
 
