@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :categories do 
     resources :plants, only: [:index, :destroy, :create]
   end 
+
   post "categories/plants" => "plants#create"
+  
   resources :plants, only: [:index, :destroy]
 end
 

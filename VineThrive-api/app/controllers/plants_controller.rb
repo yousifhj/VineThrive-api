@@ -5,7 +5,6 @@ class PlantsController < ApplicationController
     end 
 
     def create
-
         name = params[:name]
         category_name = params[:category]
         category = Category.where(name: category_name.downcase).take
@@ -15,7 +14,6 @@ class PlantsController < ApplicationController
             })
             puts plant.to_json
         end
-         
         render json: plant
     end 
 
