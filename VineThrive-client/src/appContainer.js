@@ -17,7 +17,8 @@ class AppContainer {
     createPlant(event) {
         event.preventDefault();
         const data = event.target;
-
+        const category = document.getElementById('categorySelect').value
+        console.log(category)
         fetch(`${this.url}/categories/plants`, {
             method: 'POST',
             headers: {
@@ -29,9 +30,20 @@ class AppContainer {
               category: document.getElementById('categorySelect').value
             })
         })
-        .then(resp => {
+        .then(res => res.json()
+        ).then(res => {
+            
+            console.log('response',res)
+            const container = document.getElementById(category)
+            const p = document.createElement('p');
+            p.setAttribute("id", `plant-${res.id}`);
+            p.innerText = res.name;
+            
+            container.appendChild(p)
+            
             document.getElementById("plant_name_input").value = ""
         }).catch(err => {
+            console.log(err)
             console.log('done')
         })
     }
@@ -45,10 +57,10 @@ class AppContainer {
         });
         // insiantiate DailyPlants with these Plants
         new DailyPlants(randomPlants)
-
+        const dailyPlantsDiv = document.getElementById('dailyPlants')
+        dailyPlantsDiv.innerHTML = ""
         AppContainer.dailyPlants.plants.forEach(plant => {
             const container = document.querySelector('.container');
-            const dailyPlantsDiv = document.getElementById('dailyPlants');
             const plantDiv = document.createElement('div');
 
             const plantName = plant.name;
@@ -79,6 +91,9 @@ class AppContainer {
         }).then(res => {
             console.log('success remove', id)
             let elem = document.getElementById(id)
+            let plant = document.getElementById(`plant-${id}`)
+            console.log(plant)
+            plant.remove()
             elem.remove()
          }).catch(err => {
             console.log(err)
@@ -111,10 +126,10 @@ class AppContainer {
         bigIndoorDiv.innerHTML = "";
 
         AppContainer.plants.forEach(plant => {
-            console.log(plant)
             const p = document.createElement('p');
             p.innerText = plant.name;
-            console.log(plant.category.name)
+            p.setAttribute("id", `plant-${plant.id}`);
+            
             // append will be conditional based on what category it belongs to
             switch (plant.category.name) {
                 case "viningplants":
