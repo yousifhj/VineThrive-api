@@ -1,5 +1,5 @@
 class PlantsController < ApplicationController
-
+    before_action :set_plant, only: [:update, :destroy]
     def index
         render :json => Plant.all, :include => :category
     end 
@@ -17,15 +17,23 @@ class PlantsController < ApplicationController
         render json: plant
     end 
 
+    def update
+        @plant.update(like: !@plant.like)
+        render json: @plant
+    end
+
     def destroy
-       plant = Plant.find(params[:id])
-       plant.destroy
+       @plant.destroy
        render :json => {id: params[:id], message: "Plant was successfully deleted"}
     end 
 
     private
-    def plant_params
-        params.require(:plant).permit(:name)
-    end 
+        def plant_params
+            params.require(:plant).permit(:name)
+        end 
+
+        def set_plant
+            @plant = Plant.find(params[:id])
+        end
 
 end

@@ -35,13 +35,24 @@ class AppContainer {
             
             console.log('response',res)
             const container = document.getElementById(category)
-            const p = document.createElement('p');
-            p.setAttribute("id", `plant-${res.id}`);
-            p.innerText = res.name;
+            const div = document.createElement('div')
+            const p = document.createElement('p')
+            p.innerHTML=  res.name
+            const btn = document.createElement('button')
+            btn.classList.add('btn', 'float-right')
+            const icon = document.createElement('i')
+            icon.classList.add('fa', 'fa-heart-o')
+            icon.setAttribute("id", `icon-${res.id}`)
+            btn.appendChild(icon)
+            btn.addEventListener ('click', () => { this.starPlant(res.id) })
+            p.appendChild(btn)
+            div.appendChild(p);
+            div.setAttribute("id", `plant-${res.id}`)
             
-            container.appendChild(p)
+            container.appendChild(div)
             
             document.getElementById("plant_name_input").value = ""
+
         }).catch(err => {
             console.log(err)
             console.log('done')
@@ -81,6 +92,29 @@ class AppContainer {
         })
     }
 
+    starPlant (id) {
+        fetch(`${this.url}/plants/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).then(res => res.json())
+        .then(res => {
+            const icon = document.getElementById(`icon-${res.id}`)
+            if (res.like) {
+                icon.classList.add("fa-heart")
+                icon.classList.remove("fa-heart-o")
+            } else {
+                icon.classList.add("fa-heart-o")
+                icon.classList.remove("fa-heart")
+            }
+
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     removePlant(id) {
         fetch(`${this.url}/plants/${id}`, {
             method: 'DELETE',
@@ -105,7 +139,7 @@ class AppContainer {
         .then(resp => resp.json())
         .then(data => {
             data.forEach(plant => {
-                new Plant(plant.id, plant.name, plant.category)
+                new Plant(plant.id, plant.name, plant.category, plant.like)
                 if (!AppContainer.categories.map(category => category.name).includes(plant.category.name)) {
                     new Category(plant.category.name)
                 }
@@ -126,20 +160,35 @@ class AppContainer {
         bigIndoorDiv.innerHTML = "";
 
         AppContainer.plants.forEach(plant => {
-            const p = document.createElement('p');
-            p.innerText = plant.name;
-            p.setAttribute("id", `plant-${plant.id}`);
+            const div = document.createElement('div');
+            const p = document.createElement('p')
+            p.innerHTML=  plant.name
+            const btn = document.createElement('button')
+            btn.classList.add('btn', 'float-right')
+            const icon = document.createElement('i')
+            if (plant.like) {
+                icon.classList.add('fa', 'fa-heart')
+            } else {
+                icon.classList.add('fa', 'fa-heart-o')
+            }
+            
+            icon.setAttribute("id", `icon-${plant.id}`)
+            btn.appendChild(icon)
+            btn.addEventListener ('click', () => { this.starPlant(plant.id) })
+            p.appendChild(btn)
+            div.appendChild(p);
+            div.setAttribute("id", `plant-${plant.id}`);
             
             // append will be conditional based on what category it belongs to
             switch (plant.category.name) {
                 case "viningplants":
-                    viningPlantsDiv.appendChild(p);
+                    viningPlantsDiv.appendChild(div);
                     break;
                 case "easycare":
-                    easyCareDiv.appendChild(p);
+                    easyCareDiv.appendChild(div);
                     break;
                 case "bigindoor":
-                    bigIndoorDiv.appendChild(p);
+                    bigIndoorDiv.appendChild(div);
                     break;
                 default:
             }
