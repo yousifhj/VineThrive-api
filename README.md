@@ -30,7 +30,7 @@ $ rails s
 
 ### Enter in the browser to view
 ```
-$  localhost:300
+$  localhost:3000
 ```
 
 ### License
